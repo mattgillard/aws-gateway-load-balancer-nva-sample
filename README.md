@@ -57,4 +57,5 @@ No Modules.
 
 | Name | Description |
 |------|-------------|
-| app\_public\_ip | n/a |
+| app\_private\_ip | App host Private IP |
+| app\_public\_ip | App host Public IP |
