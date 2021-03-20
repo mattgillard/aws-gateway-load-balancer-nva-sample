@@ -42,10 +42,16 @@ No Modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | TFC\_WORKSPACE\_NAME | n/a | `string` | `""` | no |
-| aws-access-key | AWS Access key | `string` | n/a | yes |
-| aws-secret-key | AWS Secret key | `string` | n/a | yes |
-| region | ami-09a6a7e49bd29554b | `string` | `"ap-southeast-2"` | no |
-| server\_port | The port the server will use for HTTP requests | `number` | `8080` | no |
+| app\_subnet | App Subnet | `string` | `"10.100.10.0/24"` | no |
+| aws-access-key | AWS Access key | `string` | `null` | no |
+| aws-profile | n/a | `any` | `null` | no |
+| aws-secret-key | AWS Secret key | `string` | `null` | no |
+| gwlb\_subnet | GWLB Subnet | `string` | `"10.100.200.0/24"` | no |
+| healthcheck\_port | The port the LB will use for healthchecks | `number` | `80` | no |
+| region | n/a | `string` | `"ap-southeast-2"` | no |
+| security\_subnets | DMZ Subnets | `list(string)` | <pre>[<br>  "10.100.1.0/24",<br>  "10.100.2.0/24"<br>]</pre> | no |
+| ssh\_key\_name | SSH key to use for ec2 instances | `string` | `"terraform"` | no |
+| vpc\_cidr | CIDR range for VPC | `string` | `"10.100.0.0/16"` | no |
 
 ## Outputs
 
