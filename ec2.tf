@@ -34,10 +34,10 @@ EOH
 	      cd /home/ubuntu
 	      git clone https://github.com/sentialabs/geneve-proxy.git
 	      sudo apt update
-	      sudo apt install python3-pip net-tools -y
+	      sudo apt install python3-pip net-tools expect -y
 	      cd geneve-proxy
 	      sudo pip3 install -r requirements.txt
-	      sudo sh -c 'nohup python3 main.py > /tmp/output.log &'
+	      sudo sh -c 'nohup unbuffer python3 main.py > /tmp/output.log &'
               EOF
   tags = merge(
     local.common_tags,

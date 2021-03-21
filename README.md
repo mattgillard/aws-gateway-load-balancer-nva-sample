@@ -1,3 +1,50 @@
+#### Table of Contents
+1. [Usage](#usage)
+2. [Requirements](#requirements)
+3. [Providers](#Providers)
+4. [Inputs](#inputs)
+5. [Outputs](#outputs)
+
+## usage
+
+1. Ensure you have valid AWS creds in your environment (AWS_PROFILE or AWS_ACCESS_KEY/AWS_SECRET_KEY)
+1. Make sure you have specified a valid pre-existing in AWS ssh_key_name in variables.tf
+1. ```$ terraform plan```
+1. ```$ terraform apply -auto-approve```
+1. Output will give you three IP addresses:
+    ```bash
+    app_private_ip = "10.100.10.100"
+    app_public_ip = "52.65.20.1"
+    nva_public_ip = "54.206.25.6"
+    ```
+1. In one window SSH into your simulated app server instance via NVA and check you can access the internet:
+    ```bash
+    $ ssh -i ~/.ssh/terraform.pem -J ubuntu@54.206.25.6 ubuntu@10.100.10.100
+    $ curl ifconfig.me
+    52.65.20.1
+    ```
+    Notice you get the App Instance IP address back.
+1. In a second window SSH into your NVA:
+    ```bash
+    $ ssh -i ~/.ssh/terraform.pem  ubuntu@54.206.25.6```
+1. Take a look at the output log:
+    ```
+    $ cat /tmp/output.log
+    Listening
+    Dropped Inbound flow because port 33890 is not in the allow list
+    Dropped Inbound flow because port 2001 is not in the allow list
+    Dropped Inbound flow because port 3381 is not in the allow list
+    Dropped Inbound flow because port 8088 is not in the allow list
+    ```
+
+1. If you try and ping from the App instance you will get no response as ICMP is blocked and you will see this message in the log:
+
+    ```
+    Dropped Outbound flow because protocol 1 is not in the allow list
+    ```
+
+
+<!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
 | Name | Version |
@@ -59,3 +106,5 @@ No Modules.
 |------|-------------|
 | app\_private\_ip | App host Private IP |
 | app\_public\_ip | App host Public IP |
+| nva\_public\_ip | NVA Public IP |
+<!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
